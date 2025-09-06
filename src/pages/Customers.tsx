@@ -172,7 +172,7 @@ export default function Customers() {
         <table className="min-w-full text-sm">
           <thead>
             <tr className="text-left border-b dark:border-zinc-700">
-              <th className="p-2">Thời gian</th>
+              <th className="p-2">Ngày bán</th>
               <th className="p-2">Khách hàng</th>
               <th className="p-2">SĐT</th>
               <th className="p-2">Thiết bị</th>
@@ -187,7 +187,7 @@ export default function Customers() {
           <tbody>
             {rows.map((r) => (
               <tr key={r.id} className="border-b last:border-0 dark:border-zinc-800">
-                <td className="p-2">{new Date(r.sold_at).toLocaleString("vi-VN")}</td>
+                <td className="p-2">{new Date(r.sold_at).toLocaleDateString("vi-VN")}</td>
                 <td className="p-2">{r.customer_name}</td>
                 <td className="p-2">{r.customer_phone}</td>
                 <td className="p-2">{r.device_name}</td>

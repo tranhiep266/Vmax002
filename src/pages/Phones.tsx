@@ -37,6 +37,7 @@ export default function Phones() {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [priceSold, setPriceSold] = useState<number>(0);
+  const [soldDate, setSoldDate] = useState<string>(""); // ⬅️ ngày bán (yyyy-mm-dd)
 
   //  Filters
   const [q, setQ] = useState("");                  // tìm Tên/IMEI/Pin
@@ -162,11 +163,15 @@ export default function Phones() {
       alert("Giá bán không hợp lệ!");
       return;
     }
+    if (!soldDate) {
+      alert("Vui lòng chọn ngày bán!");
+      return;
+    }
 
     setLoading(true);
     setError(null);
     try {
-      // 1) Ghi vào customers
+      // 1) Ghi vào customers (thêm sold_at từ ô ngày đã chọn)
       const { error: insCusErr } = await supabase.from("customers").insert({
         customer_name: customerName,
         customer_phone: customerPhone,
@@ -176,6 +181,7 @@ export default function Phones() {
         imei: sellPhone.imei,
         price_original: sellPhone.price,
         price_sold: Number(priceSold),
+        sold_at: new Date(soldDate).toISOString(), // ⬅️ lưu ngày bán
       });
       if (insCusErr) throw insCusErr;
 
@@ -188,6 +194,7 @@ export default function Phones() {
       setCustomerName("");
       setCustomerPhone("");
       setPriceSold(0);
+      setSoldDate(""); // reset ngày
       await fetchPhones();
     } catch (e: any) {
       setError(e.message || "Lỗi khi bán");
@@ -434,6 +441,14 @@ export default function Phones() {
               <label className="text-sm block">Giá bán ()
                 <input type="number" className="w-full mt-1 px-3 py-2 rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-950"
                   value={priceSold} onChange={(e) => setPriceSold(Number(e.target.value))} />
+              </label>
+              <label className="text-sm block">Ngày bán
+                <input
+                  type="date"
+                  className="w-full mt-1 px-3 py-2 rounded-xl border dark:border-zinc-700 bg-white dark:bg-zinc-950"
+                  value={soldDate}
+                  onChange={(e) => setSoldDate(e.target.value)}
+                />
               </label>
             </div>
             <div className="mt-4 flex justify-end gap-2">

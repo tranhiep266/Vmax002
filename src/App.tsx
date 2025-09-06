@@ -4,7 +4,6 @@ import Dashboard from "./pages/Dashboard";
 import Phones from "./pages/Phones";
 import Brands from "./pages/Brands";
 import Customers from "./pages/Customers";
-import Sales from "./pages/Sales";
 
 export default function App() {
   return (
@@ -14,7 +13,6 @@ export default function App() {
         <Route path="/phones" element={<Phones />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/customers" element={<Customers />} />
-        <Route path="/sales" element={<Sales />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>

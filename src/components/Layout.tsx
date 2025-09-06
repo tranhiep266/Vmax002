@@ -20,9 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <nav className="space-y-2">
           <NavLink to="/" className={({isActive}) => `${linkBase} ${isActive?linkActive:""}`}>Tổng quan</NavLink>
           <NavLink to="/phones" className={({isActive}) => `${linkBase} ${isActive?linkActive:""}`}>Điện thoại</NavLink>
-          <NavLink to="/brands" className={({isActive}) => `${linkBase} ${isActive?linkActive:""}`}>Hãng</NavLink>
           <NavLink to="/customers" className={({isActive}) => `${linkBase} ${isActive?linkActive:""}`}>Khách hàng</NavLink>
-          <NavLink to="/sales" className={({isActive}) => `${linkBase} ${isActive?linkActive:""}`}>Lịch sử bán</NavLink>
         </nav>
       </aside>
 
